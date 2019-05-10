@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    target: 'webworker',
     devtool: 'source-map',
     devServer: {
         contentBase: path.join(__dirname, "dist")
@@ -12,7 +13,8 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, "dist")
+        path: path.join(__dirname, "dist"),
+        globalObject: '(self || this)'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']

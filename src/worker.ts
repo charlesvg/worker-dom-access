@@ -11,4 +11,3 @@ window.document.body.addEventListener('click', async (mouseEvent) => {
     console.log('Hello From Worker! MouseEvent.screenX=' + screenX);
 }, false);
 
-window.bla =4;
