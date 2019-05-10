@@ -10,7 +10,7 @@ export class TargetProxy {
             if (onmessage) {
                 onmessage.apply(null, args);
             }
-            this.onMessage.apply(this, args);
+            this.onMessage.apply(this, args as any);
         };
     }
 

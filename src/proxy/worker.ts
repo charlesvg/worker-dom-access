@@ -11,7 +11,7 @@ dedicatedWorkerGlobalScope.onmessage = (...args) => {
     if (onmessage) {
         onmessage.apply(null, args);
     }
-    onMessage.apply(null, args);
+    onMessage.apply(null, args as any);
 };
 
 function onMessage({data}) {
@@ -70,6 +70,7 @@ function getAction(target, name, receiver) {
 
 function setAction(target, name, value) {
     const valueProxy = convertToProxy(value);
+    console.log(name, valueProxy);
     postMessage(target.parentId, 'setAction', [name, valueProxy]);
     return true;
 }
@@ -82,6 +83,7 @@ function applyAction(target, thisValue, args = []) {
 export function WorkerProxyObject(parentId: string) {
     let proxyObject = objects.get(parentId);
     if (!proxyObject) {
+        console.log('New proxy for', parentId);
         const target: any = () => { /* */ };
         target.parentId = parentId;
         proxyObject = new Proxy(target, {
